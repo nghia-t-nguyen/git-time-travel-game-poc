@@ -18,7 +18,9 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) {
-            if (System.Math.Abs(body.position.x-mousePos.x) > 1.5f)
+            bool mouseClickInInputField = mousePos.x > 3.71f && mousePos.x < 11.36f
+                && mousePos.y < -2.16f && mousePos.y > -2.57f;
+            if (System.Math.Abs(body.position.x-mousePos.x) > 1.5f && !mouseClickInInputField)
                 target = new Vector2(mousePos.x, 0);
             else
                 target = transform.position;
