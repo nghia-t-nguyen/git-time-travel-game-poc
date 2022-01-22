@@ -19,10 +19,11 @@ public class StopwatchTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += 1*Time.deltaTime;
-        int totalSeconds = (int) currentTime;
-
-        textDisplay.GetComponent<Text>().text = secondsToDisplay(totalSeconds);
+        if (ScrollAreaPanelOpener.setActivation == false) {
+            currentTime += 1*Time.deltaTime;
+            int totalSeconds = (int) currentTime;
+            textDisplay.GetComponent<Text>().text = secondsToDisplay(totalSeconds);
+        }
     }
 
     string secondsToDisplay(int totalSeconds) {

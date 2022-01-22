@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     private Animator anim;
     private Vector2 target;
     private float horizontalInput;
+    private bool mouseClickInInputField;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
@@ -18,12 +19,15 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) {
-            bool mouseClickInInputField = mousePos.x > 3.71f && mousePos.x < 11.36f
-                && mousePos.y < -2.16f && mousePos.y > -2.57f;
-            if (System.Math.Abs(body.position.x-mousePos.x) > 1.5f && !mouseClickInInputField)
+            float mousePosRelativeX = mousePos.x - body.position.x; // relative to player
+            float mousePosRelativeY = mousePos.y - body.position.y;
+            mouseClickInInputField =  mousePosRelativeX > -1.32f && mousePosRelativeX < 8.72f
+                && mousePosRelativeY > -2.52f && mousePosRelativeY < -2.03f;
+            if (System.Math.Abs(mousePosRelativeX) > 1.5f && !mouseClickInInputField && !ScrollAreaPanelOpener.setActivation)
                 target = new Vector2(mousePos.x, 0);
             else
                 target = transform.position;
+        
         }
 
         transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * 5f);
