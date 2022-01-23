@@ -4,17 +4,36 @@ using System.Collections.Generic;
 /*
  * This class represents game data to be saved by the user
  */
+
 public class GameData {
     public int time;
-    public bool cat;
+    public float[] position;
 
     public GameData() {
-        cat = true;
         time = (int) StopwatchTimer.currentTime;
+        position = new float[3];
+        position[0] = 0;
+        position[1] = 0;
+        position[2] = 0;
+    }
+
+    public GameData(Player player) {
+        time = (int) StopwatchTimer.currentTime;
+        position = new float[3];
+        position[0] = player.transform.position.x;
+        position[1] = player.transform.position.y;
+        position[2] = player.transform.position.z;
     }
 
     public GameData merge(GameData other) {
         return new GameData();
+    }
+
+    public load() {
+        StopwatchTimer.currentTime = time;
+        player.transform.position.x = position[0];
+        player.transform.position.y = position[1];
+        player.transform.position.z = position[2];
     }
 }
 
