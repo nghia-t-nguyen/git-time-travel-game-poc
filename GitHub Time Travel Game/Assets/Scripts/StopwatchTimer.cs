@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StopwatchTimer : MonoBehaviour
 {
     // Start is called before the first frame update
-    float currentTime = 0f;
+    public static float currentTime = 0f;
     float startingTime = 0f;
     public GameObject textDisplay;
 
